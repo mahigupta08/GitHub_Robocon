@@ -1,0 +1,36 @@
+/* Assignment 2 — Digit Frequency
+
+Write a C++ program that takes a number and finds how many times each digit (0–9) appears.
+
+Requirements:
+
+Use an array of size 10 to store the digit counts.
+Extract each digit and update its count.
+Use a loop to check all digits.
+Use if to print only the digits that appear.
+Don't print digits with a count of 0.
+Handle the input 0 separately. */
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    cout<<"Enter a number\n";
+  int n; int d=0;
+  cin>>n;
+  int a[10];
+  int i;
+  for(i=0;i<10;i++)
+      a[i]=0;
+  
+ while(n>0)
+     { d=n%10;
+     a[d]=a[d]+1;
+     n=n/10;}
+    
+    for(i=0;i<10;i++)
+    cout<<i<<" appears "<<a[i]<<" times.\n";
+ 
+    
+    return 0;
+}

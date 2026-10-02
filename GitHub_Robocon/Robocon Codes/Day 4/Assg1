@@ -1,0 +1,62 @@
+/* You are designing a simple control system for a robotic vehicle using an Arduino. The robot has two switches that control its movement. Three LEDs — Green, Yellow, and Red — are used to indicate what the robot is currently doing.
+
+Your task is to connect the two switches and three LEDs to the Arduino and write a program that reads the state of both switches and controls the LEDs according to the following conditions:
+
+• When both switches are ON:
+  - Green LED should be ON.
+  - Yellow LED should be OFF.
+  - Red LED should be OFF.
+  - The robot is moving forward.
+
+• When the first switch is OFF and the second switch is ON:
+  - Green LED should be OFF.
+  - Yellow LED should be OFF.
+  - Red LED should be ON.
+  - The robot is moving backward.
+
+• When the second switch is OFF, regardless of the state of the first switch:
+  - Green LED should be OFF.
+  - Yellow LED should be ON.
+  - Red LED should be OFF.
+  - The robot is stopped. */
+
+
+int sw1=7;
+int sw2=6;
+int ledg=3;
+int ledr=5;
+int ledy=4;
+void setup()
+{
+  pinMode(sw1, INPUT);
+  pinMode(sw2, INPUT);
+  pinMode(ledg, OUTPUT);
+  pinMode(ledy, OUTPUT);
+  pinMode(ledr, OUTPUT);
+  Serial.begin(9600);
+                    
+}
+
+  void loop()
+{
+ bool s1=digitalRead(sw1);
+  bool s2=digitalRead(sw2);
+  if(s1==HIGH&&s2==HIGH)
+  {digitalWrite(ledg, HIGH);
+   digitalWrite(ledy, LOW);
+   digitalWrite(ledr, LOW);
+   Serial.println("Robot is moving forward");}
+  if(s1==LOW&&s2==HIGH)
+  {digitalWrite(ledr, HIGH);
+   digitalWrite(ledy, LOW);
+   digitalWrite(ledg, LOW);
+   Serial.println("Robot is moving backward");}
+  if(s2==LOW)
+  {digitalWrite(ledy, HIGH);
+   digitalWrite(ledr, LOW);
+   digitalWrite(ledg, LOW);
+   Serial.println("Robot is stopped");}
+    
+  
+  }
+  

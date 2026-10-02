@@ -1,0 +1,36 @@
+/*Task: Decimal to Binary Conversion Using LEDs in Tinkercad
+
+Using Arduino in Tinkercad, design and implement a circuit that converts a decimal 
+number entered through the Serial Monitor into its corresponding 4-bit binary representation.
+*/
+
+void setup()
+{
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{ int x=Serial.parseInt();
+  
+ int a[4]; int i;
+ for(i=3;i>=0;i--)
+ { a[i]=x%2;
+  x=x/2;
+ } 
+    
+   
+ for(i=0;i<4;i++)
+ { if(a[i]==0)
+ {digitalWrite((i+2), LOW); }
+  if(a[i]==1)
+  {digitalWrite((i+2), HIGH);  } 
+ }
+  
+  
+  
+  
+}

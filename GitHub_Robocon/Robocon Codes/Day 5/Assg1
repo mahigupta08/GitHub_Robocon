@@ -1,0 +1,73 @@
+/* 1. You are designing a simple lighting control system for a robotic vehicle using an Arduino. The system has one potentiometer that controls the brightness of three LEDs — Green, Yellow, and Red.
+
+Your task is to connect the potentiometer and three LEDs to the Arduino and write a program that reads the value of the potentiometer and controls the LEDs according to the following conditions:
+
+When the potentiometer value is between 0 and 340:
+Green LED should be ON.
+Yellow LED should be OFF.
+Red LED should be OFF.
+
+The Green LED should have brightness proportional to the potentiometer value.
+When the potentiometer value is between 341 and 680:
+Green LED should be OFF.
+Yellow LED should be ON.
+Red LED should be OFF.
+
+The Yellow LED should have brightness proportional to the potentiometer value within this range.
+When the potentiometer value is between 681 and 1023:
+Green LED should be OFF.
+Yellow LED should be OFF.
+Red LED should be ON.
+
+The Red LED should have brightness proportional to the potentiometer value within this range.
+Display the potentiometer value and the current LED state on the Serial Monitor. */
+
+int ledg=3;
+int ledy=6;
+int ledr=5;
+int pot=A3;
+  
+void setup()
+{
+  pinMode(ledg, OUTPUT);
+  pinMode(ledr, OUTPUT);
+  pinMode(ledy, OUTPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop()
+{ 
+  int val=analogRead(pot);
+  String state="";
+  
+  if(val>=0&&val<=340)
+  {int gbright=map(val,0,340,0,255);
+  analogWrite(ledg,gbright);
+  analogWrite(ledy,0);
+  analogWrite(ledr,0);
+   state="Green on";}
+  
+  
+  else if(val>=341&&val<=680)
+  {int ybright=map(val,341,680,0,255);
+  analogWrite(ledy,ybright);
+  analogWrite(ledg,0);
+  analogWrite(ledr,0);
+   state="Yellow on";}
+    
+  else if(val>=681&&val<=1023)
+  { int rbright=map(val,681,1023,0,255);
+  analogWrite(ledr,rbright);
+  analogWrite(ledy,0);
+  analogWrite(ledg,0);
+   state="Red on";}
+  else
+    Serial.print("Invalid input");
+  
+  Serial.print("Current state: ");
+  Serial.println(state);
+  Serial.print("Potentiometer value: ");
+  Serial.println(val);
+  delay(1000);
+}

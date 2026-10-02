@@ -1,0 +1,131 @@
+/* Q2. Create a C++ class called Robot to control a robot.
+
+The robot has the following properties:
+- Speed
+- Battery
+
+Requirements:
+1. Make the data members private.
+2. Create the following member functions:
+   - setSpeed()
+   - setBattery()
+   - moveForward()
+   - moveBackward()
+   - turnLeft()
+   - turnRight()
+   - displayStatus()
+3. Speed should only accept values between 0 and 100.
+4. Battery should only accept values between 0 and 100.
+5. The robot should not move if the battery is 0%.
+6. Each movement should reduce the battery by 5%.
+7. Create a Robot object in main().
+8. Take the speed and battery values as input from the user.
+9. Execute a sequence of movement commands.
+10. Display the final speed and battery level. */
+
+#include <iostream>
+using namespace std;
+class Robot 
+{
+private:
+    int speed;
+    int battery;
+
+public:
+        void setSpeed(int s) 
+        {
+        if (s >= 0 && s <= 100)
+        speed = s;
+        else 
+        {cout << "Invalid speed\n";
+        speed = 0;}
+        }
+    
+
+    void setBattery(int b) 
+    {
+        if (b >= 0 && b <= 100) 
+         battery = b;
+        else
+        {cout << "Invalid battery\n";
+            battery = 0;}
+    }
+    void moveForward() 
+    {
+        if (battery>0)
+        {        
+            cout << "Robot moves forward.\n";
+            battery=battery-5;
+            if(battery<0)
+            battery=0;
+        }
+        else
+        cout<< "Battery is 0";
+    }
+
+    void moveBackward()
+     {
+        if (battery>0)
+        {        
+cout << "Robot moves backward.\n";
+            battery=battery-5;
+            if(battery<0)
+            battery=0;
+        }
+        else
+        cout<< "Battery is 0";
+    }
+
+    void turnLeft() 
+    {
+        if (battery>0)
+        {        
+            cout << "Robot turns left.\n";
+            battery=battery-5;
+            if(battery<0)
+            battery=0;
+        }
+        
+        else
+        cout<< "Battery is 0";
+    }
+
+    void turnRight()
+     {
+       if (battery>0) 
+        {        
+            cout << "Robot turns right.\n";
+            battery=battery-5;
+            if(battery<0)
+            battery=0;
+        }
+        else
+        cout<< "Battery is 0";
+    }
+
+    void displayStatus()
+     {
+        cout << "Speed: " << speed << "\n";
+        cout << "Battery: " << battery << "%\n";
+    }
+};
+int main() 
+{  Robot r;
+    int userSpeed, userBattery;
+
+    cout << "Enter initial speed (0-100): ";
+    cin >> userSpeed;
+    r.setSpeed(userSpeed);
+
+    cout << "Enter initial battery percentage (0-100): ";
+    cin >> userBattery;
+    r.setBattery(userBattery);
+    r.moveForward();
+    r.turnRight();
+    r.turnLeft();
+    r.moveBackward();
+    r.displayStatus();
+
+    return 0;
+}
+
