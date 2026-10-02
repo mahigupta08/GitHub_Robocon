@@ -1,0 +1,81 @@
+/* 2. You are designing a simple warning system for a robotic vehicle using an Arduino. The robot has one ultrasonic sensor to detect obstacles and one potentiometer to adjust the warning distance. Three LEDs — Green, Yellow, and Red — are used to indicate how close the robot is to an obstacle.
+
+Your task is to connect the ultrasonic sensor, potentiometer, and three LEDs to the Arduino and write a program that reads the distance from the ultrasonic sensor and the value of the potentiometer and controls the LEDs according to the following conditions:
+
+Use the potentiometer to set a warning distance between 10 cm and 50 cm.
+When the obstacle is farther than the warning distance:
+Green LED should be ON.
+Yellow LED should be OFF.
+Red LED should be OFF.
+The robot is at a safe distance.
+When the obstacle is within the warning distance but more than half of the warning distance:
+Green LED should be OFF.
+Yellow LED should be ON.
+Red LED should be OFF.
+The robot is getting close to the obstacle.
+When the obstacle is at or below half of the warning distance:
+Green LED should be OFF.
+Yellow LED should be OFF.
+Red LED should be ON. */ 
+
+const int trig = 10;
+const int echo=11;
+const int pot=A3;
+const int ledg = 3;
+const int ledy = 4;
+const int ledr = 2;
+
+void setup() {
+  
+  Serial.begin(9600);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(ledg, OUTPUT);
+  pinMode(ledy, OUTPUT);
+  pinMode(ledr, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  long duration = pulseIn(echo, HIGH);
+  float distance = duration * 0.0343 / 2;
+  int val = analogRead(pot);
+  float dist = map(val, 0, 1023, 10, 50);
+  float halfDist = dist/ 2.0;
+  String statusMessage = "";
+
+   if (distance > dist) {
+    digitalWrite(ledg, HIGH);
+    digitalWrite(ledy, LOW);
+    digitalWrite(ledr, LOW);
+    statusMessage = "Safe distance.";
+  } 
+  else if (distance > halfDist && distance <= dist) {
+    digitalWrite(ledg, LOW);
+    digitalWrite(ledy, HIGH);
+    digitalWrite(ledr, LOW);
+    statusMessage = "Getting close to the obstacle.";
+  } 
+  else {
+    digitalWrite(ledg, LOW);
+    digitalWrite(ledy, LOW);
+    digitalWrite(ledr, HIGH);
+    statusMessage = "Dangerously close to the obstacle!";
+  }
+
+  Serial.print("Measured Distance: ");
+  Serial.print(distance);
+  Serial.print(" cm"); 
+  Serial.print("Warning Distance Threshold: ");
+  Serial.print(dist);
+  Serial.print(" cm");
+  
+  Serial.print("Status: ");
+  Serial.println(statusMessage);
+  delay(200);
+}

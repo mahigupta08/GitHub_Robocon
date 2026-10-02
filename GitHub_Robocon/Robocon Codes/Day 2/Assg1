@@ -23,7 +23,7 @@ Requirements:
 #include <iostream>
 using namespace std;
 int r[8]={};
-int readv(int s[8])
+int input(int s[8])
 {
     for (int i=0; i<8; i++)
     {
@@ -35,8 +35,7 @@ int linep(int s[8])
 {
     int sum=0, activateds=0;
     for (int i=0; i<8; i++)
-    {
-        if (r[i]==1)
+    { if (r[i]==1)
         {
             sum+=i;
             activateds++;
@@ -70,7 +69,7 @@ int movement(double p)
 }
 int main()
 {
-    readv(r);
+    input(r);
     double p= linep(r);
     movement(p);
     return 0;

@@ -1,4 +1,4 @@
-/* You are designing a simple control system for a robotic vehicle using an Arduino. The robot has two switches that control its movement. Three LEDs — Green, Yellow, and Red — are used to indicate what the robot is currently doing.
+You are designing a simple control system for a robotic vehicle using an Arduino. The robot has two switches that control its movement. Three LEDs — Green, Yellow, and Red — are used to indicate what the robot is currently doing.
 
 Your task is to connect the two switches and three LEDs to the Arduino and write a program that reads the state of both switches and controls the LEDs according to the following conditions:
 
@@ -36,8 +36,7 @@ void setup()
   Serial.begin(9600);
                     
 }
-
-  void loop()
+ void loop()
 {
  bool s1=digitalRead(sw1);
   bool s2=digitalRead(sw2);

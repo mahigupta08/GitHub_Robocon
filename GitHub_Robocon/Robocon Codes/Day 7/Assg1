@@ -1,0 +1,32 @@
+/* Control the speed of a DC motor using a potentiometer and L293D motor driver in Tinkercad.
+Arduino Uno
+L293D motor driver IC
+DC motor
+Breadboard
+Neat and color-coded wiring
+Build the circuit in Tinkercad using the above components.
+Use the potentiometer to control the speed of the DC motor.
+Use PWM to vary the motor speed from 0% to 100%.
+The motor should stop at the minimum potentiometer value and run at maximum speed at the maximum value. */
+
+const int in4=5;
+const int in3=2;
+const int en3=6;
+const int pot=A3;
+
+void setup()
+{
+  pinMode(in4,OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(en3, OUTPUT);
+  pinMode(pot, INPUT);
+}
+void loop()
+{ 
+  int val=analogRead(pot);
+  int input=map(val,0,1023,0,255);
+  
+  digitalWrite(in3,HIGH);
+  digitalWrite(in4,LOW);
+  analogWrite(en3, input);
+}
